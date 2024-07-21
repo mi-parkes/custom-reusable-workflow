@@ -44,6 +44,14 @@ jobs:
         run: |
             poetry run task doc
 
+      - name: Upload documentation
+        if: ${{ inputs.doc }}
+        uses: actions/upload-artifact@master
+        with:
+          name: page
+          path: doc/build/html
+          if-no-files-found: error
+
       # - name: Run tests
       #   run: |
       #     if ${{ inputs.coverage }}; then
