@@ -52,6 +52,18 @@ jobs:
           path: doc/build/html
           if-no-files-found: error
 
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
+    name: Deploy
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
       # - name: Run tests
       #   run: |
       #     if ${{ inputs.coverage }}; then
