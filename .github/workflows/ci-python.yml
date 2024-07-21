@@ -44,12 +44,15 @@ jobs:
         run: |
             poetry run task doc
 
+      - name: Archive
+        run: tar --dereference --hard-dereference --directory doc/build/html/ -cvf artifact.tar .
+        
       - name: Upload documentation
         if: ${{ inputs.doc }}
         uses: actions/upload-artifact@master
         with:
-          name: page
-          path: doc/build/html
+          name: github-pages
+          path: ./artifact.tar
           if-no-files-found: error
 
   deploy:
