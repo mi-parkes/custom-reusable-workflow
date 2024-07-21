@@ -11,6 +11,10 @@ on:
         required: false
         type: boolean
         default: false
+      doc:
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   build:
@@ -34,6 +38,12 @@ jobs:
       - name: Build package
         run: |
           poetry build
+
+      - name: Generate documentation
+        run: |
+          if ${{ inputs.doc }}; then
+            poetry run task doc
+          fi
 
       # - name: Run tests
       #   run: |
