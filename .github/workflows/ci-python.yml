@@ -40,10 +40,9 @@ jobs:
           poetry build
 
       - name: Generate documentation
+        if: ${{ inputs.doc }}
         run: |
-          if ${{ inputs.doc }}; then
             poetry run task doc
-          fi
 
       # - name: Run tests
       #   run: |
