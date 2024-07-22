@@ -23,7 +23,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
+      - name: Set default branch.
+        run: git remote set-head origin --auto
+        shell: bash
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
